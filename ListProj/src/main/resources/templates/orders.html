@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--<title>Orders List</title>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!--</head>-->
+<body th:fragment="content">
+    <div class="container">
+        <h1 class="mt-5">Orders List</h1>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Order Number</th>
+                    <th>Product</th>                    
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterate over the orders list -->
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${order.orderNo}"></td>
+                    <td th:text="${order.productName}"></td>
+                    <td th:text="${order.price}"></td>
+                    <td th:text="${order.quantity}"></td>                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

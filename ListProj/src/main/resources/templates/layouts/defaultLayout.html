@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- header -->
+    <div th:replace="~{layouts/commonHeader :: commonHeader}"></div>
+</head>
+<body>
+    <!-- content -->
+    
+    <!--<div th:if="${type=='L' }" th:replace="~{loginForm :: content}">-->
+    <!--</div> -->
+    <!--<p th:text="'Type is: ' + ${type}"></p>-->
+    <!--<div th:if="${type=='R' }" th:replace="~{loginResults :: content}">-->
+    <!--</div>-->
+    <th:block th:switch="${type}">
+        <!--<p th:text="'Type is: ' + ${type}"></p>-->
+        <th:block th:case="'L'">
+            <p th:replace="~{loginForm :: content}">Login</p>
+        </th:block>    
+        <th:block th:case="'R'">
+            <p th:replace="~{loginResults :: content}">Results</p>
+        </th:block>     
+        <th:block th:case="'E'">
+            <p th:replace="~{List :: content}">List</p>
+        </th:block>  
+        <th:block th:case="'H'">
+            <p th:replace="~{Home :: content}">Home</p>
+        </th:block> 
+        <th:block th:case="'G'">
+            <p th:replace="~{Graph :: content}">Graph</p>
+        </th:block> 
+        <th:block th:case="'A'">
+            <p th:replace="~{About :: content}">About</p>
+        </th:block> 
+        <th:block th:case="'C'">
+            <p th:replace="~{Contact :: content}">Contact</p>
+        </th:block> 
+        <th:block th:case="'T'">
+            <p th:replace="~{Terms :: content}">Terms</p>
+        </th:block>
+        <th:block th:case="'P'">
+            <p th:replace="~{Privacy :: content}">Privacy</p>
+        </th:block>
+        <p th:case="*">Default</p>
+    </th:block>
+</body>
+<footer>
+    <!-- footer -->
+     <div th:replace="~{layouts/commonFooter :: commonFooter}"></div>
+</footer>
+</html>

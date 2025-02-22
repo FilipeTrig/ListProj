@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Personal Data</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        .prompt {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p><strong>Username:</strong> <span th:text="*{username}" ></span></p>
+        <div class="prompt">
+            <label for="password">Change Password:</label>
+            <input type="password" id="password" name="password" th:value="${password}">
+        </div>
+        <div class="prompt">
+            <label for="weight">Weight:</label>
+            <input type="text" id="weight" name="weight" th:value="${weight}">
+        </div>
+    </div>
+</body>
+</html>

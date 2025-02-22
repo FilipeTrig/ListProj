@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<body th:fragment="content">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th{
+            /*border: 1px solid #ddd;*/
+            padding: 3px;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        input[type="checkbox"] {
+            display: block;
+            margin: auto;
+        }
+    </style>
+    <form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Completed</th>
+                    <th>Task</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item1}" id="item1"></td>
+                    <td>Plan all meals for the day in advance (what and when)</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item2}" id="item2"></td>
+                    <td>Eat no more than three times</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item3}" id="item3"></td>
+                    <td>Skip a meal</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item4}" id="item4"></td>
+                    <td>No calories after 8pm</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item5}" id="item5"></td>
+                    <td>Check the calorie count of everything you want to eat or drink</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item6}" id="item6"></td>
+                    <td>Set yourself a calorie goal and stick to it</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item7}" id="item7"></td>
+                    <td>Have a “fasting” day with less than 800kcal</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item8}" id="item8"></td>
+                    <td>Keep a diary of what you eat and how you feel</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item9}" id="item9"></td>
+                    <td>Check your portion size</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item10}" id="item10"></td>
+                    <td>Only eat when sitting at a table</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item11}" id="item11"></td>
+                    <td>Don’t eat between meals</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item12}" id="item12"></td>
+                    <td>Cut out crisps, biscuits, cakes and sweets</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item13}" id="item13"></td>
+                    <td>Cut out fried food</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item14}" id="item14"></td>
+                    <td>Have only one course at meal-time</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item15}" id="item15"></td>
+                    <td>Cut out carbs</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item16}" id="item16"></td>
+                    <td>Swap unhealthy snacks for fruits and vegetables</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item17}" id="item17"></td>
+                    <td>Swap rice/potatoes/pasta for extra vegetables</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item18}" id="item18"></td>
+                    <td>Use meal replacement products</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item19}" id="item19"></td>
+                    <td>Swap unhealthy snacks with 6-8 individual nuts</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item20}" id="item20"></td>
+                    <td>Drink only water or unsweetened coffee or tea</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item21}" id="item21"></td>
+                    <td>Swap sugary soft drinks with diet or no sugar versions</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item22}" id="item22"></td>
+                    <td>Do not drink alcohol</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item23}" id="item23"></td>
+                    <td>Drink a pint of water before each meal</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item24}" id="item24"></td>
+                    <td>Swap juices or smoothies with whole fruit and vegetables</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item25}" id="item25"></td>
+                    <td>Eat at least 5 portions of fruit or vegetables each day</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item26}" id="item26"></td>
+                    <td>Snack only on vegetables</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item27}" id="item27"></td>
+                    <td>Eat only foods with a green nutrition label for total fat</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item28}" id="item28"></td>
+                    <td>Eat only foods with a green nutrition label for sugar</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item29}" id="item29"></td>
+                    <td>Make sure half of your main meal of the day is a salad or vegetables</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item30}" id="item30"></td>
+                    <td>Swap rice/potatoes/pasta with extra vegetables</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item31}" id="item31"></td>
+                    <td>Swap fatty meats with lean meats</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item32}" id="item32"></td>
+                    <td>Eat slowly or 20 chews per bite</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item33}" id="item33"></td>
+                    <td>Focus on your food while eating</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item34}" id="item34"></td>
+                    <td>Stop eating before you feel full</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item35}" id="item35"></td>
+                    <td>Use smaller plates and bowls</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item36}" id="item36"></td>
+                    <td>Cut food into smaller pieces</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item37}" id="item37"></td>
+                    <td>Eat for less than 20 minutes at a time</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item38}" id="item38"></td>
+                    <td>Walk up and down a flight of stairs for as long as you can</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item39}" id="item39"></td>
+                    <td>Go cycling for as long as you can</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item40}" id="item40"></td>
+                    <td>Go swimming for as long as you can</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item41}" id="item41"></td>
+                    <td>Stretching Exercises</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item42}" id="item42"></td>
+                    <td>Attend an exercise class</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item43}" id="item43"></td>
+                    <td>Play a group sport</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item44}" id="item44"></td>
+                    <td>Go to the gym</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item45}" id="item45"></td>
+                    <td>Exercise at home with the 21 minutes NHS Choices workout: https://www.nhs.uk/livewell/exercise/10-minuteworkouts</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item46}" id="item46"></td>
+                    <td>Brisk walking for as long as you can</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item47}" id="item47"></td>
+                    <td>Walk 10,000 steps</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item48}" id="item48"></td>
+                    <td>Walk/cycle instead of taking the bus or car</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item49}" id="item49"></td>
+                    <td>Go for a walk with your friend(s)</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item50}" id="item50"></td>
+                    <td>Stand up while working</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item51}" id="item51"></td>
+                    <td>Take the stairs whenever you can</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item52}" id="item52"></td>
+                    <td>Have an active day with your family or friends</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:checked="*{item53}" id="item53"></td>
+                    <td>Stand up while watching TV</td>
+                </tr>                    
+            </tbody>
+        </table>
+    </form>
+</body>    
+</html>
