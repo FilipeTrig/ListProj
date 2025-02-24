@@ -86,7 +86,7 @@ public class JSONData {
 
         String[] items=node.split(",");
 
-        //JsonNode items = node.get("items");
+        //JsonNode items = node.get("items"); 
         for (int i = 0; i < items.length; i++) {
             returnItems.add(Boolean.parseBoolean(items[i]));            
         }
