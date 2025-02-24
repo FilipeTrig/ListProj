@@ -61,7 +61,7 @@ public class EntryDataService implements EntryDataAcessInterface {
 
     @Override
     public ArrayList<EntryModel> getEntriesRange(LocalDate startDate, LocalDate endDate) { 
-        //JSONData jsonData = new JSONData();       
+        //JSONData jsonData = new JSONData();     
         List<EntryModel> entries = jdbcTemplate.query("SELECT * FROM ENTRIES WHERE DATE BETWEEN ? AND ?", new EntryMapper(), startDate, endDate);
         ArrayList<EntryModel> results= new ArrayList<EntryModel>(); 
         for (EntryModel it : entries) {
