@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ListProjApplication",
+            "request": "launch",
+            "mainClass": "ListProj.ListProjApplication",
+            "projectName": "listproj"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-ListProjApplication<rest>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
