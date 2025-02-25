@@ -22,7 +22,8 @@ public class EntryMapper implements RowMapper<EntryModel> {
         // column count can't be the number of items needs changing for number of items
         // number of columsn will be thr parameters of each Entry 
         ArrayList<Boolean> items = new ArrayList<Boolean>(54);
-        entry.setDate(LocalDate.parse(rs.getString("date"),formatter));
+        //entry.setDate(LocalDate.parse(rs.getString("date"),formatter));
+        entry.setDate(rs.getDate("date").toLocalDate());
         entry.setId(rs.getInt("ID"));
         entry.setWeight(rs.getInt("weight"));
         for (int i = 1; i <= 55; i++) {
