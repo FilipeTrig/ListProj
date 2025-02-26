@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import ListProj.models.EntryModel;
 
@@ -16,7 +17,7 @@ public interface EntryBussinessServiceInterface {
 
     public void destroy();
 
-    public EntryModel getByDate(LocalDate date);
+    public Optional<EntryModel> getByDate(LocalDate date);
 
     public List<EntryModel> getAllEntries();
 

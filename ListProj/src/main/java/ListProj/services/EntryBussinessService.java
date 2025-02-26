@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -50,7 +51,7 @@ public class EntryBussinessService implements EntryBussinessServiceInterface {
     }   
 
     @Override
-    public EntryModel getByDate(LocalDate date) {
+    public Optional<EntryModel> getByDate(LocalDate date) {
         return EntryDB.getByDate(date);
     }
 
