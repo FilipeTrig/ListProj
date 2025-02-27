@@ -18,11 +18,17 @@ public class EntryClientService implements EntryDataAcessInterface {
 
     @Autowired
     DataSource dataSource;
-
-    private JdbcClient jdbcClient;
+    
+    @Autowired
+    JdbcClient jdbcClient;
 
     public EntryClientService(JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
+    }
+
+    public void init() {
+    System.out.println("OrdersBussinessService2: init method called");
+    //EntryList = new ArrayList<EntryModel>();
     }
     
     @Override
