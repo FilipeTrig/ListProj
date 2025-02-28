@@ -57,8 +57,8 @@ public class EntryClientService implements EntryDataAcessInterface {
 
     @Override
     public int addOne(EntryModel entry) {
-        var updated = jdbcClient.sql("INSERT INTO ENTRIES(ID,DATE,ITEMS,WEIGHT) values(?,?,?,?)")
-                .params(List.of(entry.getId(),entry.getDate(),entry.getItems(),entry.getWeight()))
+        var updated = jdbcClient.sql("INSERT INTO ENTRIES(DATE,ITEMS,WEIGHT) values(?,?,?)")
+                .params(List.of(entry.getDate(),entry.getItems(),entry.getWeight()))
                 .update();
 
         Assert.state(updated == 1, "Failed to create Entry " + entry.getId());
