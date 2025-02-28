@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
 
+import ListProj.data.EntryClientService;
 import ListProj.data.EntryDataAcessInterface;
 import ListProj.data.EntryDataService;
 import ListProj.services.EntryBussinessService;
@@ -28,7 +29,7 @@ public class SpringConfig {
 
     @Bean(name = "EntryDB")
     @RequestScope //@SessionScope
-    public EntryDataAcessInterface geDataService() {
-        return new EntryDataService();
+    public EntryDataAcessInterface getDataService() {
+        return new EntryClientService();
     }
 }

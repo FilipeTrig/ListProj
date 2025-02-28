@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 //import org.apache.catalina.servlets.DefaultServlet.SortManager.Order;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,7 @@ public class EntriesRestController {
     }
 
     @GetMapping("/getOne")
-    public EntryModel getOne(@RequestParam() String date) {
+    public Optional<EntryModel> getOne(@RequestParam() String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;  
         LocalDate returnDate = LocalDate.parse(date, formatter);
         return service.getByDate(returnDate);
