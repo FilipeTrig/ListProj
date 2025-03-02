@@ -1,6 +1,7 @@
 package ListProj.data;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,8 +23,8 @@ public class EntryClientService implements EntryDataAcessInterface {
     @Autowired
     JdbcClient jdbcClient;
 
-    public EntryClientService(JdbcClient jdbcClient) {
-        this.jdbcClient = jdbcClient;
+    public EntryClientService() {
+        super();
     }
 
     public void init() {
@@ -33,21 +34,21 @@ public class EntryClientService implements EntryDataAcessInterface {
     
     @Override
     public Optional<EntryModel> getByDate(LocalDate date) {
-        return jdbcClient.sql("SELECT * FROM ENTRIES WHERE DATE = :date")
+        return jdbcClient.sql("SELECT * FROM entries WHERE DATE = :date")
                 .param("date", date)
                 .query(EntryModel.class).optional();
     }
 
     @Override
     public List<EntryModel> getAllEntries() {
-        return jdbcClient.sql("SELECT * FROM ENTRIES")
+        return jdbcClient.sql("SELECT * FROM entries")
                 .query(EntryModel.class)
                 .list();
     }
 
     @Override
     public List<EntryModel> getEntriesRange(LocalDate startDate, LocalDate endDate) {
-        return jdbcClient.sql("SELECT * FROM ENTRIES WHERE DATE BETWEEN ? AND ?")
+        return jdbcClient.sql("SELECT * FROM entries WHERE DATE BETWEEN ? AND ?")
                 //.param("startDate",startDate)
                 //.param("endDate",endDate)
                 .params(startDate,endDate)
@@ -57,7 +58,8 @@ public class EntryClientService implements EntryDataAcessInterface {
 
     @Override
     public int addOne(EntryModel entry) {
-        var updated = jdbcClient.sql("INSERT INTO ENTRIES(DATE,ITEMS,WEIGHT) values(?,?,?)")
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        var updated = jdbcClient.sql("INSERT INTO entries(DATE,ITEMS,WEIGHT) values(?,?,?)")
                 .params(List.of(entry.getDate(),entry.getItems(),entry.getWeight()))
                 .update();
 
@@ -67,7 +69,7 @@ public class EntryClientService implements EntryDataAcessInterface {
 
     @Override
     public boolean deleteOne(LocalDate date) {
-        var updated = jdbcClient.sql("DELETE FROM ENTRIES WHERE DATE = ?")
+        var updated = jdbcClient.sql("DELETE FROM entries WHERE DATE = ?")
                 .params(date)
                 .update();
 
@@ -77,7 +79,7 @@ public class EntryClientService implements EntryDataAcessInterface {
 
     @Override
     public EntryModel updateOne(LocalDate date, EntryModel entry) {
-        var updated = jdbcClient.sql("INSERT INTO ENTRIES(ID,DATE,ITEMS,WEIGHT) values(?,?,?,?)")
+        var updated = jdbcClient.sql("INSERT INTO entries(ID,DATE,ITEMS,WEIGHT) values(?,?,?,?)")
                 .params(List.of(entry.getId(),entry.getDate(),entry.getItems(),entry.getWeight()))
                 .update();
 

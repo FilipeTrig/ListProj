@@ -16,7 +16,8 @@ public class EntryModel {
     private int id;
     //@JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate date;
-    private ArrayList<Boolean> items= new ArrayList<Boolean>(54);
+    //@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+    private ArrayList<Boolean> items = new ArrayList<Boolean>(54);
     private int weight;
 
 

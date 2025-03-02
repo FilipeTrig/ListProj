@@ -1,11 +1,13 @@
 package ListProj.models;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -26,8 +28,12 @@ public class EntryMapper implements RowMapper<EntryModel> {
         //entry.setDate(rs.getDate("date").toLocalDate());
         entry.setId(rs.getInt("ID"));
         entry.setWeight(rs.getInt("weight"));
-        for (int i = 1; i <= 55; i++) {
-            items.add(rs.getBoolean("item" + i));
+        List<String> array = List.of(rs.getString("items").split(","));
+        if (array != null) {
+            //String[] itemArray = (String[]) array.split(",");
+            for (String item : array) {                
+                items.add(Boolean.parseBoolean(item));
+            }
         }
         entry.setItems(items);
         return entry;
@@ -48,5 +54,7 @@ public class EntryMapper implements RowMapper<EntryModel> {
         System.out.println(entryJSON.toString());
         return entryJSON;
         */
+
+        /*false,false,false,false,,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false" */
     }
 }

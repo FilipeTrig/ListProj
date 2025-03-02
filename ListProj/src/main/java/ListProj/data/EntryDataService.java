@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.sql.DataSource;
 
@@ -27,13 +28,12 @@ public class EntryDataService implements EntryDataAcessInterface {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public EntryModel getByDate(LocalDate date) {
+    public Optional<EntryModel> getByDate(LocalDate date) {
         //EntryDataService entryDataService = new EntryDataService();
-        List <EntryModel> ListR = jdbcTemplate.query("SELECT * FROM ENTRIES WHERE DATE =?", new EntryMapper(),date);
-        return Boolean.parseBoolean(ListR.get(0).getItems().toString()) ? ListR.get(0) : null;
+        List <EntryModel> ListR = jdbcTemplate.query("SELECT * FROM entries WHERE DATE =?", new EntryMapper(),date);
+        return Boolean.parseBoolean(ListR.get(0).getItems().toString()) ? Optional.of(ListR.get(0)) : null;
                             //entryDataService.convertItemsJSON(entry.getItems(),   
                             //date);
-                           
         //return results.size() > 0 ? results.get(0) : null; //get(0) is not a good practice
     }
 
@@ -41,7 +41,7 @@ public class EntryDataService implements EntryDataAcessInterface {
     public ArrayList<EntryModel> getAllEntries() {
         //EntryModel entry = new EntryModel();
         JSONData jsonData = new JSONData();
-        List<EntryModel> entries=jdbcTemplate.query("SELECT * FROM ENTRIES", new EntryMapper());
+        List<EntryModel> entries=jdbcTemplate.query("SELECT * FROM entries", new EntryMapper());
         ArrayList<EntryModel> results= new ArrayList<EntryModel>();
         for (EntryModel it : entries) {
             /*
@@ -62,7 +62,7 @@ public class EntryDataService implements EntryDataAcessInterface {
     @Override
     public ArrayList<EntryModel> getEntriesRange(LocalDate startDate, LocalDate endDate) { 
         //JSONData jsonData = new JSONData();      
-        List<EntryModel> entries = jdbcTemplate.query("SELECT * FROM ENTRIES WHERE DATE BETWEEN ? AND ?", new EntryMapper(), startDate, endDate);
+        List<EntryModel> entries = jdbcTemplate.query("SELECT * FROM entries WHERE DATE BETWEEN ? AND ?", new EntryMapper(), startDate, endDate);
         ArrayList<EntryModel> results= new ArrayList<EntryModel>(); 
         for (EntryModel it : entries) {
             /*
@@ -79,7 +79,7 @@ public class EntryDataService implements EntryDataAcessInterface {
     }
 
     @Override
-    public long addOne(EntryModel entry) {
+    public int addOne(EntryModel entry) {
 
         //JSONData jsonData = new JSONData();
 
@@ -93,7 +93,7 @@ public class EntryDataService implements EntryDataAcessInterface {
         }
         */
         SimpleJdbcInsert simpleInsert = new SimpleJdbcInsert(jdbcTemplate)
-                                                .withTableName("ENTRIES");
+                                                .withTableName("entries");
         
         // creating an hash map to "decode" the object into a map
         
@@ -105,12 +105,12 @@ public class EntryDataService implements EntryDataAcessInterface {
         );
 
         Number result = simpleInsert.executeAndReturnKey(parameters);
-        return result.longValue();
+        return result.intValue();
     }
 
     @Override
     public boolean deleteOne(LocalDate date) {
-        long result = jdbcTemplate.update("DELETE FROM ENTRIES WHERE DATE = ?", date);
+        long result = jdbcTemplate.update("DELETE FROM entries WHERE DATE = ?", date);
         return result>0 ? true : false;
     }
 
@@ -125,7 +125,7 @@ public class EntryDataService implements EntryDataAcessInterface {
             e.printStackTrace();
         }
 
-        int result=jdbcTemplate.update("UPDATE ENTRIES SET ITEMS = ?, WEIGHT=? WHERE DATE = ?",
+        int result=jdbcTemplate.update("UPDATE entries SET ITEMS = ?, WEIGHT=? WHERE DATE = ?",
                             entry.getItems(),
                             entry.getWeight(),   
                             date);
