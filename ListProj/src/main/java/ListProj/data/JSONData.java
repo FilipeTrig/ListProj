@@ -23,22 +23,24 @@ public class JSONData {
 
     private ObjectMapper objectMapper;
    
-    public ArrayList<Boolean> readJSON(ArrayList<Boolean> items) throws JsonMappingException, JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        ArrayList<Boolean> resuList = objectMapper.readerFor(Boolean.class).readValue(items.toString());
-        //ArrayList<Boolean> resuList = new ArrayList<Boolean>();
-        //for (int i = 0; i < items.size(); i++) {
-            //resuList.add(items.get(i));
-        //}
+    public static ArrayList<Boolean> readJSONItems(String Sitems) {
+        //ObjectMapper objectMapper = new ObjectMapper();
+        String[] items = Sitems.split(",");
+        ArrayList<Boolean> resuList = new ArrayList<Boolean>();
+        for (int i = 0; i < items.length; i++) {
+            resuList.add(Boolean.parseBoolean(items[i]));
+        }
         return resuList;
     }
 
 
     // write items in JSON format so Entry can be stored in database
-    public ArrayList<Boolean> writeJSON(ArrayList<Boolean> items) throws JsonMappingException, JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        ArrayList<Boolean> resuList = objectMapper.readValue(items.toString(), new TypeReference<ArrayList<Boolean>>(){});
-        return resuList;
+    public static String writeJSONItems(ArrayList<Boolean> items) {
+        String resultList="";
+        for (Boolean item : items) {
+            resultList=resultList+","+item;
+        }
+        return resultList;
     }
 
 

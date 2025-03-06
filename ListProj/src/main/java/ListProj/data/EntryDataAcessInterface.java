@@ -7,21 +7,22 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
+import ListProj.models.EntryJSONModel;
 import ListProj.models.EntryModel;
 
 public interface EntryDataAcessInterface {
     
-    public Optional<EntryModel> getByDate(LocalDate date);
+    public Optional<EntryModel> getByDate(String date);
 
     public List<EntryModel> getAllEntries();
 
-    public List<EntryModel> getEntriesRange(LocalDate startDate, LocalDate endDate);
+    public List<EntryModel> getEntriesRange(String startDate, String endDate);
 
-    public int addOne(EntryModel entry);
+    public int addOne(EntryJSONModel entry);
 
-    public boolean deleteOne(LocalDate date);
+    public boolean deleteOne(String date);
 
-    public EntryModel updateOne(LocalDate date,EntryModel entry);
+    public EntryJSONModel updateOne(String date,EntryJSONModel entry);
 
 
 }

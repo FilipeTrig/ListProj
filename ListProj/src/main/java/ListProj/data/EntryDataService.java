@@ -17,6 +17,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import ListProj.models.EntryModel;
+import ListProj.models.EntryJSONModel;
 import ListProj.models.EntryMapper;
 
 public class EntryDataService implements EntryDataAcessInterface {
@@ -79,7 +80,7 @@ public class EntryDataService implements EntryDataAcessInterface {
     }
 
     @Override
-    public int addOne(EntryModel entry) {
+    public int addOne(EntryJSONModel entry) {
 
         //JSONData jsonData = new JSONData();
 
@@ -116,14 +117,11 @@ public class EntryDataService implements EntryDataAcessInterface {
 
     @Override
     public EntryModel updateOne(LocalDate date, EntryModel entry) {
-        JSONData jsonData = new JSONData();
+        //JSONData jsonData = new JSONData();
 
-        try {
-            entry.setItems(jsonData.writeJSON(entry.getItems()));
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        
+            entry.setItems(entry.getItems());
+        
 
         int result=jdbcTemplate.update("UPDATE entries SET ITEMS = ?, WEIGHT=? WHERE DATE = ?",
                             entry.getItems(),

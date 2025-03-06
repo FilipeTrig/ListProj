@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 
@@ -26,19 +27,25 @@ public class EntryDBController implements EntryDataAcessInterface {
         for (int i = 0; i < 54; i++) {
             items.add(false);
         }
-        EntryList.add(new EntryModel(LocalDate.now(), items,80));  
-        EntryList.add(new EntryModel(LocalDate.of(2025,1,LocalDate.now().getDayOfMonth()-1), items,75));
-        EntryList.add(new EntryModel(LocalDate.of(2025,1,LocalDate.now().getDayOfMonth()-2), items,68));
-        EntryList.add(new EntryModel(LocalDate.of(2025,1,LocalDate.now().getDayOfMonth()-3), items,77));
-        EntryList.add(new EntryModel(LocalDate.of(2025,1,LocalDate.now().getDayOfMonth()-4), items,81));
-        EntryList.add(new EntryModel(LocalDate.of(2025,1,LocalDate.now().getDayOfMonth()-5), items,82));          
+        try {
+            var day=1;
+            EntryList.add(new EntryModel(LocalDate.now(), items,80));  
+            //EntryList.add(new EntryModel(LocalDate.of(2025,1,Math.abs(LocalDate.now().getDayOfMonth()-1)), items,75));
+            EntryList.add(new EntryModel(LocalDate.of(2025,1,day), items,75));
+            EntryList.add(new EntryModel(LocalDate.of(2025,1,(day+1)), items,68));
+            EntryList.add(new EntryModel(LocalDate.of(2025,1,(day+2)), items,77));
+            EntryList.add(new EntryModel(LocalDate.of(2025,1,(day+3)), items,81));
+            EntryList.add(new EntryModel(LocalDate.of(2025,1,(day+4)), items,82));  
+        } catch (Exception e) {
+            throw new RuntimeException("Error initializing EntryList", e);
+        }    
     }
 
     @Override
-    public EntryModel getByDate(LocalDate date) {
+    public Optional<EntryModel> getByDate(LocalDate date) {
         for (EntryModel entry : EntryList) {
             if (entry.getDate().equals(date)) {
-                return entry;
+                return Optional.of(entry);
             }
         }
         return null; // not found return null
@@ -70,7 +77,7 @@ public class EntryDBController implements EntryDataAcessInterface {
     }
 
     @Override
-    public long addOne(EntryModel entry) {
+    public int addOne(EntryModel entry) {
         boolean success = EntryList.add(entry);
 
         if (success) {
