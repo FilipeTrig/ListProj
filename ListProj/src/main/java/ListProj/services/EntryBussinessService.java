@@ -4,6 +4,7 @@ package ListProj.services;
 
 
 import ListProj.data.EntryDataAcessInterface;
+import ListProj.models.EntryJSONModel;
 import ListProj.models.EntryModel;
 
 import java.security.KeyStore.Entry;
@@ -46,27 +47,27 @@ public class EntryBussinessService implements EntryBussinessServiceInterface {
     }
 
     @Override
-    public List<EntryModel> getEntriesRange(LocalDate startDate, LocalDate endDate) {
+    public List<EntryModel> getEntriesRange(String startDate, String endDate) {
         return EntryDB.getEntriesRange(startDate, endDate);
     }   
 
     @Override
-    public Optional<EntryModel> getByDate(LocalDate date) {
+    public Optional<EntryModel> getByDate(String date) {
         return EntryDB.getByDate(date);
     }
 
     @Override
-    public long addOne(EntryModel entry) {
+    public long addOne(EntryJSONModel entry) {
             return EntryDB.addOne(entry);
     }
 
     @Override
-    public EntryModel updateOne(LocalDate date,EntryModel entry) {
+    public EntryJSONModel updateOne(String date,EntryJSONModel entry) {
             return EntryDB.updateOne(date, entry);
     }
 
     @Override
-    public boolean deleteOne(LocalDate date) {
+    public boolean deleteOne(String date) {
             return EntryDB.deleteOne(date);
     }  
 

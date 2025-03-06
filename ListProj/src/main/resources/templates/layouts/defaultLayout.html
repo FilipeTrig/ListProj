@@ -43,6 +43,9 @@
         <th:block th:case="'P'">
             <p th:replace="~{Privacy :: content}">Privacy</p>
         </th:block>
+        <th:block th:case="'p'">
+            <p th:replace="~{Personal :: content}">Personal</p>
+        </th:block>
         <p th:case="*">Default</p>
     </th:block>
 </body>

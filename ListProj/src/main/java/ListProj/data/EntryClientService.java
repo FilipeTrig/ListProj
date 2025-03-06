@@ -3,15 +3,20 @@ package ListProj.data;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Optional;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.jdbc.core.convert.DefaultJdbcTypeFactory;
+
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.util.Assert;
 
+import ListProj.models.EntryJSONModel;
 import ListProj.models.EntryMapper;
 import ListProj.models.EntryModel;
 
@@ -33,10 +38,35 @@ public class EntryClientService implements EntryDataAcessInterface {
     }
     
     @Override
-    public Optional<EntryModel> getByDate(LocalDate date) {
-        return jdbcClient.sql("SELECT * FROM entries WHERE DATE = :date")
-                .param("date", date)
-                .query(EntryModel.class).optional();
+    public Optional<EntryModel> getByDate(String date) {
+        //JSONData JSONdata= new JSONData();
+        EntryModel entry= new EntryModel();
+        EntryJSONModel JSONentry= new EntryJSONModel();
+        try {
+        JSONentry = jdbcClient.sql("SELECT * FROM entries WHERE DATE = ?")
+            .param(date)
+            .query(EntryJSONModel.class)
+            .single();
+        } catch (EmptyResultDataAccessException e) {
+            JSONentry.setDate(LocalDate.parse(date));
+            String items="";
+            for (int i = 1; i < 54; i++) {
+                items = items+"false";
+                if (i <53) items = items+",";
+            }
+            JSONentry.setItems(items);
+            JSONentry.setWeight(0);
+            addOne(JSONentry);    
+            JSONentry = jdbcClient.sql("SELECT * FROM entries WHERE DATE = ?")
+                .param(date)
+                .query(EntryJSONModel.class)
+                .single();
+        }    
+        entry.setId(JSONentry.getId());
+        entry.setItems(JSONData.readJSONItems(JSONentry.getItems()));
+        entry.setDate(JSONentry.getDate());
+        entry.setWeight(JSONentry.getWeight());
+        return Optional.of(entry);
     }
 
     @Override
@@ -47,7 +77,7 @@ public class EntryClientService implements EntryDataAcessInterface {
     }
 
     @Override
-    public List<EntryModel> getEntriesRange(LocalDate startDate, LocalDate endDate) {
+    public List<EntryModel> getEntriesRange(String startDate, String endDate) {
         return jdbcClient.sql("SELECT * FROM entries WHERE DATE BETWEEN ? AND ?")
                 //.param("startDate",startDate)
                 //.param("endDate",endDate)
@@ -57,18 +87,22 @@ public class EntryClientService implements EntryDataAcessInterface {
     }
 
     @Override
-    public int addOne(EntryModel entry) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public int addOne(EntryJSONModel entry) {
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        EntryJSONModel JSONentry= new EntryJSONModel();
+        JSONentry.setId(entry.getId());
+        JSONentry.setItems(entry.getItems()); //JSONData.writeJSONItems(entry.getItems())
+        JSONentry.setDate(entry.getDate());
+        JSONentry.setWeight(entry.getWeight());
         var updated = jdbcClient.sql("INSERT INTO entries(DATE,ITEMS,WEIGHT) values(?,?,?)")
-                .params(List.of(entry.getDate(),entry.getItems(),entry.getWeight()))
+                .params(List.of(JSONentry.getDate(),JSONentry.getItems(),JSONentry.getWeight()))
                 .update();
-
         Assert.state(updated == 1, "Failed to create Entry " + entry.getId());
         return updated;
     }
 
     @Override
-    public boolean deleteOne(LocalDate date) {
+    public boolean deleteOne(String date) {
         var updated = jdbcClient.sql("DELETE FROM entries WHERE DATE = ?")
                 .params(date)
                 .update();
@@ -78,9 +112,14 @@ public class EntryClientService implements EntryDataAcessInterface {
     }
 
     @Override
-    public EntryModel updateOne(LocalDate date, EntryModel entry) {
-        var updated = jdbcClient.sql("INSERT INTO entries(ID,DATE,ITEMS,WEIGHT) values(?,?,?,?)")
-                .params(List.of(entry.getId(),entry.getDate(),entry.getItems(),entry.getWeight()))
+    public EntryJSONModel updateOne(String date, EntryJSONModel entry) {
+        EntryJSONModel JSONentry= new EntryJSONModel();
+        JSONentry.setId(entry.getId());
+        JSONentry.setItems(entry.getItems()); //JSONData.writeJSONItems(entry.getItems())
+        JSONentry.setDate(entry.getDate());
+        JSONentry.setWeight(entry.getWeight());
+        var updated = jdbcClient.sql("UPDATE entries SET ITEMS=?,WEIGHT=? WHERE DATE = ?")
+                .params(List.of(entry.getItems(),entry.getWeight(),entry.getDate()))
                 .update();
 
         Assert.state(updated == 1, "Failed to update post " + entry.getId());

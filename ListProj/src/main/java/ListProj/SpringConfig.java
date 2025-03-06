@@ -30,6 +30,6 @@ public class SpringConfig {
     @Bean(name = "EntryDB")
     @RequestScope //@SessionScope
     public EntryDataAcessInterface getDataService() {
-        return new EntryDataService();
+        return new EntryClientService();
     }
 }

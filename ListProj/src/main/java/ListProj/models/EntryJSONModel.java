@@ -11,7 +11,7 @@ public class EntryJSONModel {
 
     @Id
     private int id;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
     private String items;
     private int weight;
