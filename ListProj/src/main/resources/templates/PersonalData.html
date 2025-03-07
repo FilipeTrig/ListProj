@@ -3,33 +3,58 @@
 <head>
     <title>Personal Data</title>
     <style>
-        body {
+        .container {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            position:center;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
+            /*height: 100vh;*/
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
         }
-        .container {
-            text-align: center;
+        .container h2 {
+            margin-bottom: 20px;
         }
-        .prompt {
-            margin: 20px 0;
+        .container input[type="text"],
+        .container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <p><strong>Username:</strong> <span th:text="*{username}" ></span></p>
-        <div class="prompt">
-            <label for="password">Change Password:</label>
-            <input type="password" id="password" name="password" th:value="${password}">
-        </div>
-        <div class="prompt">
-            <label for="weight">Weight:</label>
-            <input type="text" id="weight" name="weight" th:value="${weight}">
-        </div>
+    <div class="container" >        
+        <form action="#" method="post" th:action="@{processPersonal}" th:object="${PersonalModel}">
+            <label for="Name">Username</label>
+            <input th:field = "*{Name}" type="text" id="Name">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('Name')}" th:errors="*{Name}">Username Error</p>
+            <label for="Password">Password</label>
+            <input th:field = "*{Password}" type="password" id="Password">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('Password')}" th:errors="*{Password}">Password Error</p>
+            <label for="weight">Weight</label>
+            <input th:field = "*{weight}" type="text" id="weight">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}">Weight Error</p>
+            <button type="submit">Save</button>
+        </form>
     </div>
 </body>
 </html>

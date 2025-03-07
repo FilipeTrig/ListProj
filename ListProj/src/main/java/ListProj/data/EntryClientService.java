@@ -50,7 +50,7 @@ public class EntryClientService implements EntryDataAcessInterface {
         } catch (EmptyResultDataAccessException e) {
             JSONentry.setDate(LocalDate.parse(date));
             String items="";
-            for (int i = 1; i < 54; i++) {
+            for (int i = 0; i < 54; i++) {
                 items = items+"false";
                 if (i <53) items = items+",";
             }

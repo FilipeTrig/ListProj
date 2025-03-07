@@ -49,7 +49,7 @@ public class LoginController {
 
         model.addAttribute("EntryModel", model);
         model.addAttribute("type", "E");
-        for (int i = 1; i < 54; i++) {
+        for (int i = 0; i < 54; i++) {
             model.addAttribute("item"+String.valueOf(i), false);
             //System.out.println("item"+String.valueOf(i));
         }

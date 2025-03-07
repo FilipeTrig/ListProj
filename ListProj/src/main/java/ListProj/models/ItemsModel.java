@@ -1,0 +1,71 @@
+package ListProj.models;
+
+import org.springframework.ui.Model;
+
+public record ItemsModel (
+    String item1,
+    String item2,
+    String item3,
+    String item4,
+    String item5,
+    String item6,
+    String item7,
+    String item8,
+    String item9,
+    String item10,
+    String item11,
+    String item12,
+    String item13,
+    String item14,
+    String item15,
+    String item16,
+    String item17,
+    String item18,
+    String item19,
+    String item20,
+    String item21,
+    String item22,
+    String item23,
+    String item24,
+    String item25,
+    String item26,
+    String item27,
+    String item28,
+    String item29,
+    String item30,
+    String item31,
+    String item32,
+    String item33,
+    String item34,
+    String item35,
+    String item36,
+    String item37,
+    String item38,
+    String item39,
+    String item40,
+    String item41,
+    String item42,
+    String item43,
+    String item44,
+    String item45,
+    String item46,
+    String item47,
+    String item48,
+    String item49,
+    String item50,
+    String item51,
+    String item52,
+    String item53,
+    String item54
+) {
+    public String[] getAllItems() {
+        return new String[] {
+            item1, item2, item3, item4, item5, item6, item7, item8, item9, item10,
+            item11, item12, item13, item14, item15, item16, item17, item18, item19, item20,
+            item21, item22, item23, item24, item25, item26, item27, item28, item29, item30,
+            item31, item32, item33, item34, item35, item36, item37, item38, item39, item40,
+            item41, item42, item43, item44, item45, item46, item47, item48, item49, item50,
+            item51, item52, item53, item54
+        };
+    }
+}
