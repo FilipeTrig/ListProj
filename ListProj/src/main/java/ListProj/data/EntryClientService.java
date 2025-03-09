@@ -114,7 +114,7 @@ public class EntryClientService implements EntryDataAcessInterface {
     @Override
     public EntryJSONModel updateOne(String date, EntryJSONModel entry) {
         EntryJSONModel JSONentry= new EntryJSONModel();
-        JSONentry.setId(entry.getId());
+        //JSONentry.setId(entry.getId());
         JSONentry.setItems(entry.getItems()); //JSONData.writeJSONItems(entry.getItems())
         JSONentry.setDate(entry.getDate());
         JSONentry.setWeight(entry.getWeight());

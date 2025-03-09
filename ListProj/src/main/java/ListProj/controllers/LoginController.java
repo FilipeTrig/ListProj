@@ -43,7 +43,7 @@ public class LoginController {
         return "layouts/defaultLayout.html";
     }
 
-
+    /*
     @GetMapping("/List")
     public String displayList(Model model) {
 
@@ -61,5 +61,6 @@ public class LoginController {
     public String printHelloWorld() {
         return "this is still working";
     }
+        */
 
 }

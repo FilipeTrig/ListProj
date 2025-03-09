@@ -2,6 +2,7 @@ package ListProj.controllers;
 
 import jakarta.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,10 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import ListProj.models.PersonalModel;
 import ListProj.models.loginModel;
+import ListProj.services.EntryBussinessServiceInterface;
 
 @Controller
 @RequestMapping("/personal")
 public class PersonalController {
+
+    EntryBussinessServiceInterface service;
+
+   @Autowired
+    public PersonalController(EntryBussinessServiceInterface service) {
+        super();
+        this.service = service;
+    } 
     
     @GetMapping("/")
     public String displayPersonal(Model model) {

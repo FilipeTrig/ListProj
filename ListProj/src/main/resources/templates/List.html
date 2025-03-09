@@ -45,8 +45,7 @@
             background-color: #45a049;
         }
     </style>
-    <!--<form action="#" method="post" th:action="@{processPersonal}" th:object="${PersonalModel}"></form> add this here so you can submit the items same as login and personal data-->
-    <form action="#" method="post" th:action="@{getItemsHTML/}" th:object="${EntryJSONModel}">
+    <form action="#" method="post" th:action="@{getItemsHTML/}" th:object="${itemsModel}">
         <table>
             <thead>
                 <tr>
@@ -56,217 +55,221 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item1}" th:field="*{item1}" th:checked="*{item1}" id="item1"></td>
+                    <td><input type="checkbox" th:value="*{item1}" th:field="${itemsModel.item1}" th:checked="*{item1}" id="item1"></td>
                     <td>Plan all meals for the day in advance (what and when)</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item2}" th:field="*{item2}" th:checked="*{item2}" id="item2"></td>
+                    <td><input type="checkbox" th:value="*{item2}" th:field="${itemsModel.item2}" th:checked="*{item2}" id="item2"></td>
                     <td>Eat no more than three times</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item3}" th:field="*{item3}" th:checked="*{item3}" id="item3"></td>
+                    <td><input type="checkbox" th:value="*{item3}" th:field="${itemsModel.item3}" th:checked="*{item3}" id="item3"></td>
                     <td>Skip a meal</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item4}" th:field="*{item4}" th:checked="*{item4}" id="item4"></td>
+                    <td><input type="checkbox" th:value="*{item4}" th:field="${itemsModel.item4}" th:checked="*{item4}" id="item4"></td>
                     <td>No calories after 8pm</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item5}" th:field="*{item5}" th:checked="*{item5}" id="item5"></td>
+                    <td><input type="checkbox" th:value="*{item5}" th:field="${itemsModel.item5}" th:checked="*{item5}" id="item5"></td>
                     <td>Check the calorie count of everything you want to eat or drink</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item6}" th:field="*{item6}" th:checked="*{item6}" id="item6"></td>
+                    <td><input type="checkbox" th:value="*{item6}" th:field="${itemsModel.item6}" th:checked="*{item6}" id="item6"></td>
                     <td>Set yourself a calorie goal and stick to it</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item7}" th:field="*{item7}" th:checked="*{item7}" id="item7"></td>
+                    <td><input type="checkbox" th:value="*{item7}" th:field="${itemsModel.item7}" th:checked="*{item7}" id="item7"></td>
                     <td>Have a “fasting” day with less than 800kcal</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item8}" th:field="*{item8}" th:checked="*{item8}" id="item8"></td>
+                    <td><input type="checkbox" th:value="*{item8}" th:field="${itemsModel.item8}" th:checked="*{item8}" id="item8"></td>
                     <td>Keep a diary of what you eat and how you feel</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item9}" th:field="*{item9}" th:checked="*{item9}" id="item9"></td>
+                    <td><input type="checkbox" th:value="*{item9}" th:field="${itemsModel.item9}" th:checked="*{item9}" id="item9"></td>
                     <td>Check your portion size</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item10}" th:field="*{item10}" th:checked="*{item10}" id="item10"></td>
+                    <td><input type="checkbox" th:value="*{item10}" th:field="${itemsModel.item10}" th:checked="*{item10}" id="item10"></td>
                     <td>Only eat when sitting at a table</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item11}" th:field="*{item11}" th:checked="*{item11}" id="item11"></td>
+                    <td><input type="checkbox" th:value="*{item11}" th:field="${itemsModel.item11}" th:checked="*{item11}" id="item11"></td>
                     <td>Don’t eat between meals</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item12}" th:field="*{item12}" th:checked="*{item12}" id="item12"></td>
+                    <td><input type="checkbox" th:value="*{item12}" th:field="${itemsModel.item12}" th:checked="*{item12}" id="item12"></td>
                     <td>Cut out crisps, biscuits, cakes and sweets</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item13}" th:field="*{item13}" th:checked="*{item13}" id="item13"></td>
+                    <td><input type="checkbox" th:value="*{item13}" th:field="${itemsModel.item13}" th:checked="*{item13}" id="item13"></td>
                     <td>Cut out fried food</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item14}" th:field="*{item14}" th:checked="*{item14}" id="item14"></td>
+                    <td><input type="checkbox" th:value="*{item14}" th:field="${itemsModel.item14}" th:checked="*{item14}" id="item14"></td>
                     <td>Have only one course at meal-time</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item15}" th:field="*{item15}" th:checked="*{item15}" id="item15"></td>
+                    <td><input type="checkbox" th:value="*{item15}" th:field="${itemsModel.item15}" th:checked="*{item15}" id="item15"></td>
                     <td>Cut out carbs</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item16}" th:field="*{item16}" th:checked="*{item16}" id="item16"></td>
+                    <td><input type="checkbox" th:value="*{item16}" th:field="${itemsModel.item16}" th:checked="*{item16}" id="item16"></td>
                     <td>Swap unhealthy snacks for fruits and vegetables</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item17}" th:field="*{item17}" th:checked="*{item17}" id="item17"></td>
+                    <td><input type="checkbox" th:value="*{item17}" th:field="${itemsModel.item17}" th:checked="*{item17}" id="item17"></td>
                     <td>Swap rice/potatoes/pasta for extra vegetables</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item18}" th:field="*{item18}" th:checked="*{item18}" id="item18"></td>
+                    <td><input type="checkbox" th:value="*{item18}" th:field="${itemsModel.item18}" th:checked="*{item18}" id="item18"></td>
                     <td>Use meal replacement products</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item19}" th:field="*{item19}" th:checked="*{item19}" id="item19"></td>
+                    <td><input type="checkbox" th:value="*{item19}" th:field="${itemsModel.item19}" th:checked="*{item19}" id="item19"></td>
                     <td>Swap unhealthy snacks with 6-8 individual nuts</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item20}" th:field="*{item20}" th:checked="*{item20}" id="item20"></td>
+                    <td><input type="checkbox" th:value="*{item20}" th:field="${itemsModel.item20}" th:checked="*{item20}" id="item20"></td>
                     <td>Drink only water or unsweetened coffee or tea</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item21}" th:field="*{item21}" th:checked="*{item21}" id="item21"></td>
+                    <td><input type="checkbox" th:value="*{item21}" th:field="${itemsModel.item21}" th:checked="*{item21}" id="item21"></td>
                     <td>Swap sugary soft drinks with diet or no sugar versions</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item22}" th:field="*{item22}" th:checked="*{item22}" id="item22"></td>
+                    <td><input type="checkbox" th:value="*{item22}" th:field="${itemsModel.item22}" th:checked="*{item22}" id="item22"></td>
                     <td>Do not drink alcohol</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item23}" th:field="*{item23}" th:checked="*{item23}" id="item23"></td>
+                    <td><input type="checkbox" th:value="*{item23}" th:field="${itemsModel.item23}" th:checked="*{item23}" id="item23"></td>
                     <td>Drink a pint of water before each meal</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item24}" th:field="*{item24}" th:checked="*{item24}" id="item24"></td>
+                    <td><input type="checkbox" th:value="*{item24}" th:field="${itemsModel.item24}" th:checked="*{item24}" id="item24"></td>
                     <td>Swap juices or smoothies with whole fruit and vegetables</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item25}" th:field="*{item25}" th:checked="*{item25}" id="item25"></td>
+                    <td><input type="checkbox" th:value="*{item25}" th:field="${itemsModel.item25}" th:checked="*{item25}" id="item25"></td>
                     <td>Eat at least 5 portions of fruit or vegetables each day</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item26}" th:field="*{item26}" th:checked="*{item26}" id="item26"></td>
+                    <td><input type="checkbox" th:value="*{item26}" th:field="${itemsModel.item26}" th:checked="*{item26}" id="item26"></td>
                     <td>Snack only on vegetables</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item27}" th:field="*{item27}" th:checked="*{item27}" id="item27"></td>
+                    <td><input type="checkbox" th:value="*{item27}" th:field="${itemsModel.item27}" th:checked="*{item27}" id="item27"></td>
                     <td>Eat only foods with a green nutrition label for total fat</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item28}" th:field="*{item28}" th:checked="*{item28}" id="item28"></td>
+                    <td><input type="checkbox" th:value="*{item28}" th:field="${itemsModel.item28}" th:checked="*{item28}" id="item28"></td>
                     <td>Eat only foods with a green nutrition label for sugar</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item29}" th:field="*{item29}" th:checked="*{item29}" id="item29"></td>
+                    <td><input type="checkbox" th:value="*{item29}" th:field="${itemsModel.item29}" th:checked="*{item29}" id="item29"></td>
                     <td>Make sure half of your main meal of the day is a salad or vegetables</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item30}" th:field="*{item30}" th:checked="*{item30}" id="item30"></td>
+                    <td><input type="checkbox" th:value="*{item30}" th:field="${itemsModel.item30}" th:checked="*{item30}" id="item30"></td>
                     <td>Swap rice/potatoes/pasta with extra vegetables</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item31}" th:field="*{item31}" th:checked="*{item31}" id="item31"></td>
+                    <td><input type="checkbox" th:value="*{item31}" th:field="${itemsModel.item31}" th:checked="*{item31}" id="item31"></td>
                     <td>Swap fatty meats with lean meats</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item32}" th:field="*{item32}" th:checked="*{item32}" id="item32"></td>
+                    <td><input type="checkbox" th:value="*{item32}" th:field="${itemsModel.item32}" th:checked="*{item32}" id="item32"></td>
                     <td>Eat slowly or 20 chews per bite</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item33}" th:field="*{item33}" th:checked="*{item33}" id="item33"></td>
+                    <td><input type="checkbox" th:value="*{item33}" th:field="${itemsModel.item33}" th:checked="*{item33}" id="item33"></td>
                     <td>Focus on your food while eating</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item34}" th:field="*{item34}" th:checked="*{item34}" id="item34"></td>
+                    <td><input type="checkbox" th:value="*{item34}" th:field="${itemsModel.item34}" th:checked="*{item34}" id="item34"></td>
                     <td>Stop eating before you feel full</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item35}" th:field="*{item35}" th:checked="*{item35}" id="item35"></td>
+                    <td><input type="checkbox" th:value="*{item35}" th:field="${itemsModel.item35}" th:checked="*{item35}" id="item35"></td>
                     <td>Use smaller plates and bowls</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item36}" th:field="*{item36}" th:checked="*{item36}" id="item36"></td>
+                    <td><input type="checkbox" th:value="*{item36}" th:field="${itemsModel.item36}" th:checked="*{item36}" id="item36"></td>
                     <td>Cut food into smaller pieces</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item37}" th:field="*{item37}" th:checked="*{item37}" id="item37"></td>
+                    <td><input type="checkbox" th:value="*{item37}" th:field="${itemsModel.item37}" th:checked="*{item37}" id="item37"></td>
                     <td>Eat for less than 20 minutes at a time</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item38}" th:field="*{item38}" th:checked="*{item38}" id="item38"></td>
+                    <td><input type="checkbox" th:value="*{item38}" th:field="${itemsModel.item38}" th:checked="*{item38}" id="item38"></td>
                     <td>Walk up and down a flight of stairs for as long as you can</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item39}" th:field="*{item39}" th:checked="*{item39}" id="item39"></td>
+                    <td><input type="checkbox" th:value="*{item39}" th:field="${itemsModel.item39}" th:checked="*{item39}" id="item39"></td>
                     <td>Go cycling for as long as you can</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item40}" th:field="*{item40}" th:checked="*{item40}" id="item40"></td>
+                    <td><input type="checkbox" th:value="*{item40}" th:field="${itemsModel.item40}" th:checked="*{item40}" id="item40"></td>
                     <td>Go swimming for as long as you can</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item41}" th:field="*{item41}" th:checked="*{item41}" id="item41"></td>
+                    <td><input type="checkbox" th:value="*{item41}" th:field="${itemsModel.item41}" th:checked="*{item41}" id="item41"></td>
                     <td>Stretching Exercises</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item42}" th:field="*{item42}" th:checked="*{item42}" id="item42"></td>
+                    <td><input type="checkbox" th:value="*{item42}" th:field="${itemsModel.item42}" th:checked="*{item42}" id="item42"></td>
                     <td>Attend an exercise class</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item43}" th:field="*{item43}" th:checked="*{item43}" id="item43"></td>
+                    <td><input type="checkbox" th:value="*{item43}" th:field="${itemsModel.item43}" th:checked="*{item43}" id="item43"></td>
                     <td>Play a group sport</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item44}" th:field="*{item44}" th:checked="*{item44}" id="item44"></td>
+                    <td><input type="checkbox" th:value="*{item44}" th:field="${itemsModel.item44}" th:checked="*{item44}" id="item44"></td>
                     <td>Go to the gym</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item45}" th:field="*{item45}" th:checked="*{item45}" id="item45"></td>
+                    <td><input type="checkbox" th:value="*{item45}" th:field="${itemsModel.item45}" th:checked="*{item45}" id="item45"></td>
                     <td>Exercise at home with the 21 minutes NHS Choices workout: https://www.nhs.uk/livewell/exercise/10-minuteworkouts</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item46}" th:field="*{item46}" th:checked="*{item46}" id="item46"></td>
+                    <td><input type="checkbox" th:value="*{item46}" th:field="${itemsModel.item46}" th:checked="*{item46}" id="item46"></td>
                     <td>Brisk walking for as long as you can</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item47}" th:field="*{item47}" th:checked="*{item47}" id="item47"></td>
+                    <td><input type="checkbox" th:value="*{item47}" th:field="${itemsModel.item47}" th:checked="*{item47}" id="item47"></td>
                     <td>Walk 10,000 steps</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item48}" th:field="*{item48}" th:checked="*{item48}" id="item48"></td>
+                    <td><input type="checkbox" th:value="*{item48}" th:field="${itemsModel.item48}" th:checked="*{item48}" id="item48"></td>
                     <td>Walk/cycle instead of taking the bus or car</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item49}" th:field="*{item49}" th:checked="*{item49}" id="item49"></td>
+                    <td><input type="checkbox" th:value="*{item49}" th:field="${itemsModel.item49}" th:checked="*{item49}" id="item49"></td>
                     <td>Go for a walk with your friend(s)</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item50}" th:field="*{item50}" th:checked="*{item50}" id="item50"></td>
+                    <td><input type="checkbox" th:value="*{item50}" th:field="${itemsModel.item50}" th:checked="*{item50}" id="item50"></td>
                     <td>Stand up while working</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item51}" th:field="*{item51}" th:checked="*{item51}" id="item51"></td>
+                    <td><input type="checkbox" th:value="*{item51}" th:field="${itemsModel.item51}" th:checked="*{item51}" id="item51"></td>
                     <td>Take the stairs whenever you can</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item52}" th:field="*{item52}" th:checked="*{item52}" id="item52"></td>
+                    <td><input type="checkbox" th:value="*{item52}" th:field="${itemsModel.item52}" th:checked="*{item52}" id="item52"></td>
                     <td>Have an active day with your family or friends</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" th:value="*{item53}" th:field="*{item53}" th:checked="*{item53}" id="item53"></td>
+                    <td><input type="checkbox" th:value="*{item53}" th:field="${itemsModel.item53}" th:checked="*{item53}" id="item53"></td>
                     <td>Stand up while watching TV</td>
-                </tr>                    
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:value="*{item54}" th:field="${itemsModel.item54}" th:checked="*{item54}" id="item54"></td>
+                    <td>Take levothyroxine and folic acid</td>
+                </tr>                     
             </tbody>
         </table>
         <button type="submit">Save</button>
