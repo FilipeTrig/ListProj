@@ -2,6 +2,7 @@ package ListProj.controllers;
 
 import jakarta.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,13 +12,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ListProj.data.PersonalClientService;
 import ListProj.models.EntryModel;
+import ListProj.models.PersonalModel;
 import ListProj.models.loginModel;
+import ListProj.services.PersonalBussinessService;
+import ListProj.services.PersonalBussinessServiceInterface;
 
 //
 @Controller
 @RequestMapping("/login")
 public class LoginController {
+
+    PersonalBussinessServiceInterface service;
+
+   @Autowired
+    public LoginController() {
+        super();
+        //this.service = service;
+    } 
 
     @GetMapping("/")
     public String displayLoginFrom(Model model) {
@@ -36,11 +49,28 @@ public class LoginController {
             model.addAttribute("type", "L");
             return "layouts/defaultLayout.html";
         }
-
-        model.addAttribute("loginModel", loginModel);
-        model.addAttribute("type", "R");
-
-        return "layouts/defaultLayout.html";
+        PersonalBussinessService PersonalBussinessService = new PersonalBussinessService();
+        String name=loginModel.getUsername();
+        String password=loginModel.getPassword();
+        if (PersonalBussinessService.getPersonal(name).isPresent()) { //registers new User if not in the database
+            PersonalModel PersonalModel = new PersonalModel(name, password, 0);
+            PersonalBussinessService.addPersonal(PersonalModel);
+            model.addAttribute("PersonalModel", PersonalModel);
+            model.addAttribute("logged", true);
+            model.addAttribute("type", "p"); // go to Personal Data page
+            return "redirect:/personal/";
+        }
+        if (PersonalBussinessService.checkPassword(name, password)==false) { //goes back to the login form if there are errors
+            model.addAttribute("loginModel", loginModel);
+            model.addAttribute("type", "L");
+            return "layouts/defaultLayout.html";
+        }
+        PersonalModel PersonalModel = PersonalBussinessService.getPersonal(name).get();
+        model.addAttribute("PersonalModel", PersonalModel);
+        //model.addAttribute("loginModel", loginModel);
+        model.addAttribute("logged", true);
+        model.addAttribute("type", "p"); // go to Personal Data page
+        return "redirect:/personal/";
     }
 
     /*

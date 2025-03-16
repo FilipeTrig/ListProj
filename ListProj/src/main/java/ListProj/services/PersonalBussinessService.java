@@ -1,5 +1,7 @@
 package ListProj.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ListProj.data.EntryDataAcessInterface;
@@ -8,7 +10,7 @@ import ListProj.models.PersonalModel;
 
 public class PersonalBussinessService implements PersonalBussinessServiceInterface {
 
-     @Autowired
+    @Autowired
     PersonalDataAcessInterface PersonalDB;
     
     @Override
@@ -23,23 +25,28 @@ public class PersonalBussinessService implements PersonalBussinessServiceInterfa
     }
 
     @Override
-    public void getPersonal(String name) {
-        PersonalDB.getPersonal(name);
+    public Optional<PersonalModel> getPersonal(String name) {
+        return PersonalDB.getPersonal(name);
     }
 
     @Override
-    public void updatePersonal(PersonalModel person) {
-        PersonalDB.updatePersonal(person);
+    public PersonalModel updatePersonal(PersonalModel person) {
+        return PersonalDB.updatePersonal(person);
     }
 
     @Override
-    public void deletePersonal(String name) {
-        PersonalDB.deletePersonal(name);
+    public boolean deletePersonal(String name) {
+        return PersonalDB.deletePersonal(name);
     }
 
     @Override
-    public void addPersonal(PersonalModel person) {
-        PersonalDB.addPersonal(person);
+    public int addPersonal(PersonalModel person) {
+        return PersonalDB.addPersonal(person);
+    }
+
+    @Override
+    public boolean checkPassword(String name, String password) {
+        return PersonalDB.checkPassword(name, password);
     }
     
 }

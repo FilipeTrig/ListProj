@@ -20,6 +20,7 @@ import ListProj.models.EntryJSONModel;
 import ListProj.models.EntryModel;
 import ListProj.models.ItemsModel;
 import ListProj.models.PersonalModel;
+import ListProj.models.loginModel;
 import ListProj.services.EntryBussinessService;
 import ListProj.services.EntryBussinessServiceInterface;
 import jakarta.validation.Valid;
@@ -31,14 +32,19 @@ public class ListController {
     EntryBussinessServiceInterface service;
 
     @Autowired
-    public ListController(EntryBussinessServiceInterface service) {
+    public ListController() {
         super();
-        this.service = service;
+        //this.service = service;
     }
     
     @GetMapping("/")
     public String displayList(Model model) {
 
+        if (model.getAttribute("logged")!="true") {
+            model.addAttribute("loginModel", new loginModel());
+            model.addAttribute("type", "L"); //return to login screen if not logged in
+            return "redirect:/login/";
+        }
         //EntryBussinessService EntryBussinessService = new EntryBussinessService();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
         String date = LocalDate.now().format(formatter);

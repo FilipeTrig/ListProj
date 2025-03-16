@@ -27,8 +27,13 @@ public class PersonalClientService implements PersonalDataAcessInterface {
         super();
     }
 
+    public Optional<PersonalModel> getPersonal(String name, PersonalClientService PersonalClientService) {
+        this.jdbcClient = PersonalClientService.jdbcClient;        
+        return getPersonal(name);
+    }
+
     @Override
-    public Optional<PersonalModel> getbyName(String name) {
+    public Optional<PersonalModel> getPersonal(String name) {
         
         PersonalModel person= new PersonalModel();
         try {
@@ -38,22 +43,23 @@ public class PersonalClientService implements PersonalDataAcessInterface {
             .single();
         } catch (EmptyResultDataAccessException e) {
             // return error message "person not found"
+            person=null;
         }    
         //person.setName(name);
         return Optional.of(person);
     }
 
     @Override
-    public PersonalModel updateOne(PersonalModel person) {
-        var updated = jdbcClient.sql("UPDATE entries SET ITEMS=?,WEIGHT=? WHERE DATE = ?")
-                .params(List.of(person.getName(),person.getPassword(),person.getWeight()))
+    public PersonalModel updatePersonal(PersonalModel person) {
+        var updated = jdbcClient.sql("UPDATE personal SET PASSWORD=?,WEIGHT=? WHERE NAME = ?")
+                .params(List.of(person.getPassword(),person.getWeight(),person.getName()))
                 .update();
         Assert.state(updated == 1, "Failed to update Entry " + person.getName());
         return person;
     }
 
     @Override
-    public boolean deleteOne(String name) {
+    public boolean deletePersonal(String name) {
         var updated = jdbcClient.sql("DELETE FROM personal WHERE NAME = ?")
                 .params(name)
                 .update();
@@ -63,7 +69,7 @@ public class PersonalClientService implements PersonalDataAcessInterface {
     }
 
     @Override
-    public int addOne(PersonalModel person) {
+    public int addPersonal(PersonalModel person) {
         var updated = jdbcClient.sql("INSERT INTO personal(NAME,PASSWORD,WEIGHT) values(?,?,?)")
                 .params(List.of(person.getName(),person.getPassword(),person.getWeight()))
                 .update();
@@ -71,5 +77,19 @@ public class PersonalClientService implements PersonalDataAcessInterface {
         return updated;
     }
 
-
+    @Override
+    public boolean checkPassword(String name, String password) {
+        PersonalModel person= new PersonalModel();
+        try {
+            person = jdbcClient.sql("SELECT * FROM personal WHERE NAME = ? and PASSWORD = ?")
+            .params(List.of(name,password))
+            .query(PersonalModel.class)
+            .single();
+        } catch (EmptyResultDataAccessException e) {
+            // return error message "person not found"
+            person=null;
+        }    
+        //person.setName(name);
+        return person!=null;
+    }
 }
