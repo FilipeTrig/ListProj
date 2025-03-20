@@ -6,6 +6,9 @@ public class PersonalModel {
     private String Password;
     private int weight;
 
+    public PersonalModel() {
+    }
+
     public PersonalModel(String Name, String Password, int weight) {
         this.Name = Name;
         this.Password = Password;
