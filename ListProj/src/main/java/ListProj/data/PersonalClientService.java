@@ -27,6 +27,11 @@ public class PersonalClientService implements PersonalDataAcessInterface {
         super();
     }
 
+    public void init() {
+        System.out.println("PersonalClientService: init method called");
+        //EntryList = new ArrayList<EntryModel>();
+        }
+
     public Optional<PersonalModel> getPersonal(String name, PersonalClientService PersonalClientService) {
         this.jdbcClient = PersonalClientService.jdbcClient;        
         return getPersonal(name);
@@ -43,7 +48,8 @@ public class PersonalClientService implements PersonalDataAcessInterface {
             .single();
         } catch (EmptyResultDataAccessException e) {
             // return error message "person not found"
-            person=null;
+            //person=null;
+            return Optional.empty();
         }    
         //person.setName(name);
         return Optional.of(person);

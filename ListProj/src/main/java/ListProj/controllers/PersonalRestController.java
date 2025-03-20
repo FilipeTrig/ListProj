@@ -25,12 +25,13 @@ public class PersonalRestController {
         this.service = service;
     }
     
+   /*
     @GetMapping("/login")
     public List<EntryModel> ShowAllPersonal(Model model) {
                 
-        List<EntryModel> EntryList = service.;
+        List<EntryModel> EntryList = service.getAllEntries();
         
         return EntryList;
     }
-
+    */
 }

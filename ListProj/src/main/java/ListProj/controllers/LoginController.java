@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import ListProj.data.EntryDataAcessInterface;
 import ListProj.data.PersonalClientService;
 import ListProj.models.EntryModel;
 import ListProj.models.PersonalModel;
@@ -24,12 +24,15 @@ import ListProj.services.PersonalBussinessServiceInterface;
 @RequestMapping("/login")
 public class LoginController {
 
+    private final EntryDataAcessInterface EntryDB;
+
     PersonalBussinessServiceInterface service;
 
    @Autowired
-    public LoginController() {
+    public LoginController(PersonalBussinessServiceInterface service, EntryDataAcessInterface EntryDB) {
         super();
-        //this.service = service;
+        this.service = service;
+        this.EntryDB = EntryDB;
     } 
 
     @GetMapping("/")
@@ -49,23 +52,23 @@ public class LoginController {
             model.addAttribute("type", "L");
             return "layouts/defaultLayout.html";
         }
-        PersonalBussinessService PersonalBussinessService = new PersonalBussinessService();
+        //PersonalBussinessService PersonalBussinessService = new PersonalBussinessService();
         String name=loginModel.getUsername();
         String password=loginModel.getPassword();
-        if (PersonalBussinessService.getPersonal(name).isPresent()) { //registers new User if not in the database
+        if (service.getPersonal(name).isEmpty()) { //registers new User if not in the database  // isPresent() swapped for isEmpty()
             PersonalModel PersonalModel = new PersonalModel(name, password, 0);
-            PersonalBussinessService.addPersonal(PersonalModel);
+            service.addPersonal(PersonalModel);
             model.addAttribute("PersonalModel", PersonalModel);
             model.addAttribute("logged", true);
             model.addAttribute("type", "p"); // go to Personal Data page
             return "redirect:/personal/";
-        }
-        if (PersonalBussinessService.checkPassword(name, password)==false) { //goes back to the login form if there are errors
+        } 
+        if (service.checkPassword(name, password)==false) { //goes back to the login form if there are errors
             model.addAttribute("loginModel", loginModel);
             model.addAttribute("type", "L");
             return "layouts/defaultLayout.html";
         }
-        PersonalModel PersonalModel = PersonalBussinessService.getPersonal(name).get();
+        PersonalModel PersonalModel = service.getPersonal(name).get();
         model.addAttribute("PersonalModel", PersonalModel);
         //model.addAttribute("loginModel", loginModel);
         model.addAttribute("logged", true);

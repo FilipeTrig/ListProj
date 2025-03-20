@@ -3,10 +3,12 @@ package ListProj.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ListProj.data.EntryDataAcessInterface;
 import ListProj.data.PersonalDataAcessInterface;
 import ListProj.models.PersonalModel;
+
 
 public class PersonalBussinessService implements PersonalBussinessServiceInterface {
 

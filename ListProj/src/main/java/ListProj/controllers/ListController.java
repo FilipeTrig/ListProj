@@ -32,19 +32,20 @@ public class ListController {
     EntryBussinessServiceInterface service;
 
     @Autowired
-    public ListController() {
+    public ListController(EntryBussinessServiceInterface service) {
         super();
-        //this.service = service;
+        this.service = service;
     }
     
     @GetMapping("/")
     public String displayList(Model model) {
-
+        /*
         if (model.getAttribute("logged")!="true") {
             model.addAttribute("loginModel", new loginModel());
             model.addAttribute("type", "L"); //return to login screen if not logged in
             return "redirect:/login/";
         }
+            */
         //EntryBussinessService EntryBussinessService = new EntryBussinessService();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
         String date = LocalDate.now().format(formatter);

@@ -33,7 +33,7 @@ public class SpringConfig {
 
     @Bean(name = "personalBussinessService", initMethod = "init", destroyMethod = "destroy")
     @RequestScope //@SessionScope
-    public PersonalBussinessServiceInterface PersonalBussinessServiceInterface() {
+    public PersonalBussinessServiceInterface getPersonalBussinessService() {
         return new PersonalBussinessService();
     }
 

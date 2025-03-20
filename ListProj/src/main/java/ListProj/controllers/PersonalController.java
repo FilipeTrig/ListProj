@@ -22,11 +22,11 @@ public class PersonalController {
 
     PersonalBussinessServiceInterface service;
 
-   @Autowired
-    public PersonalController() {
+    @Autowired
+    public PersonalController(PersonalBussinessServiceInterface service) {
         super();
-        //this.service = service;
-    } 
+        this.service = service;
+    }
     
     @GetMapping("/")
     public String displayPersonal(Model model) {
@@ -44,7 +44,7 @@ public class PersonalController {
             return "redirect:/login/";
         }
         if (model.getAttribute("PersonalModel")==null) {
-                model.addAttribute("PersonalModel", new PersonalModel());
+                model.addAttribute("PersonalModel", new PersonalModel("", "", 0));
                 model.addAttribute("type", "p");
         }
         PersonalModel PersonalModel = (PersonalModel) model.getAttribute("PersonalModel");
