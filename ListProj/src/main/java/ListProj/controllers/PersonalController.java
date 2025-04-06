@@ -30,23 +30,28 @@ public class PersonalController {
     
     @GetMapping("/")
     public String displayPersonal(Model model) {
-        /*
+        /* old code
         model.addAttribute("PersonalModel", new PersonalModel("Etaoin", "Etaoin", 75));
         model.addAttribute("type", "p");
         model.addAttribute("Name", "Etaoin");
         model.addAttribute("Password", "Etaoin");
         model.addAttribute("weight", "75");
         */
+        model.addAttribute("PersonalModel", service.getPersonal("Etaoin").get());
+        /* old code
         if (model.getAttribute("logged")!="true") {
             model.addAttribute("loginModel", new loginModel());
             model.addAttribute("type", "L"); //return to login screen if not logged in
             //return "layouts/defaultLayout.html";
             return "redirect:/login/";
         }
+        */
+        /* Removed because I'm defining the User in the program for now
         if (model.getAttribute("PersonalModel")==null) {
                 model.addAttribute("PersonalModel", new PersonalModel("", "", 0));
                 model.addAttribute("type", "p");
         }
+        */
         PersonalModel PersonalModel = (PersonalModel) model.getAttribute("PersonalModel");
         model.addAttribute("Name", PersonalModel.getName());   
         model.addAttribute("Password", PersonalModel.getPassword());
@@ -58,8 +63,18 @@ public class PersonalController {
     @PostMapping("/processPersonal")
     public String processPersonal(@Valid PersonalModel PersonalModel, BindingResult bindingResult, Model model) {
 
-        PersonalBussinessService PersonalBussinessService = new PersonalBussinessService();
-        PersonalBussinessService.updatePersonal(PersonalModel);
+        //PersonalBussinessService PersonalBussinessService = new PersonalBussinessService();
+        if (bindingResult.hasErrors()) { //goes back to the personal form if there are errors
+            model.addAttribute("PersonalModel", PersonalModel);
+            model.addAttribute("type", "p");
+            return "layouts/defaultLayout.html";
+        }
+        String name=PersonalModel.getName();
+        String password=PersonalModel.getPassword();
+        int weight=PersonalModel.getWeight();
+        PersonalModel Person = new PersonalModel(name, password, weight);
+        service.updatePersonal(Person);
+        model.addAttribute("PersonalModel", PersonalModel);
         model.addAttribute("type", "p");
         return "layouts/defaultLayout.html";
     }

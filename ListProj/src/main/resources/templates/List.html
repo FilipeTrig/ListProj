@@ -269,10 +269,14 @@
                 <tr>
                     <td><input type="checkbox" th:value="*{item54}" th:field="${itemsModel.item54}" th:checked="*{item54}" id="item54"></td>
                     <td>Take levothyroxine and folic acid</td>
-                </tr>                     
+                </tr>  
+                <tr>
+                    <td><input type="text" th:value="*{weight}" th:field="${itemsModel.weight}" id="weight"></td>
+                    <td>weight in Kg</td>
+                </tr>                    
             </tbody>
         </table>
         <button type="submit">Save</button>
-    </form>
+    </form>        
 </body>    
 </html>

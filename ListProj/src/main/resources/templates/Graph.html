@@ -2,20 +2,40 @@
 <html th:fragment="content">
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" th:inline="javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
+        /*
+        $.ajax({
+          url: "/Graph/getData",
+          type: "GET",
+          success: function(result){
+            var entries=[];
+            entries[0] = ['Day', 'Completed Entries','Weight (in kg)'];
+            for (var i = 0; i < result.length; i++) {
+              entries[i+1] = result[i+1];    //[result[i].day, result[i].completedEntries, result[i].weight];
+            }
+            
+        */
         var data = google.visualization.arrayToDataTable([
-          ['Day', 'Completed Entries','Weight (in kg)'],
-          ['18/02',  10, 75],
-          ['19/02',  11, 76],
-          ['20/02',  12, 77],
-          ['21/02',  9, 74],
-          ['22/02',  13, 78],
-          ['23/02',  15, 79],
-          ['24/02',  17, 80]
+        ['Day', 'Completed Entries','Weight (in kg)'],
+        ['1', 0, 0],
+        ['2', 0, 0],
+        ['3', 0, 0],
+        ['4', 0, 0],
+        ['5', 0, 0],
+        ['6', 0, 0],
+        ['7', 0, 0],
+        ['8', 0, 0],
+        ['9', 0, 0],
+        ['10', 0, 0],
+        ['11', 0, 0],
+        ['12', 0, 0],
+        ['13', 0, 0],
+        ['14', 0, 0],
+        ['15', 1, 1]
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -41,7 +61,13 @@
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
         chart.draw(view, options);
-      }
+        /*
+      },
+      failure: function(err){result = ["error",0,0];}
+      }); 
+      */
+    }
+      
     </script>
   </head>
   <body>

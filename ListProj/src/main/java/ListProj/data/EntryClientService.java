@@ -87,6 +87,58 @@ public class EntryClientService implements EntryDataAcessInterface {
     }
 
     @Override
+    public Optional<EntryModel> getByID(int ID) {
+        EntryModel entry= new EntryModel();
+        EntryJSONModel JSONentry= new EntryJSONModel();
+        JSONentry= jdbcClient.sql("SELECT * FROM entries WHERE ID = ?")
+                .param(ID)
+                .query(EntryJSONModel.class)
+                .single();
+                entry.setId(JSONentry.getId());
+                entry.setItems(JSONData.readJSONItems(JSONentry.getItems()));
+                entry.setDate(JSONentry.getDate());
+                entry.setWeight(JSONentry.getWeight());
+                return Optional.of(entry);
+    }
+
+    @Override
+    public Optional<EntryModel> getMinID() {
+        EntryModel entry= new EntryModel();
+        EntryJSONModel JSONentry= new EntryJSONModel();
+        JSONentry=jdbcClient.sql("SELECT * FROM entries WHERE ID = (SELECT MIN(ID) FROM entries)")
+                .query(EntryJSONModel.class)
+                .single();
+                entry.setId(JSONentry.getId());
+                entry.setItems(JSONData.readJSONItems(JSONentry.getItems()));
+                entry.setDate(JSONentry.getDate());
+                entry.setWeight(JSONentry.getWeight());
+                return Optional.of(entry);
+    }
+
+    @Override
+    public Optional<EntryModel> getMaxID() {
+        EntryModel entry= new EntryModel();
+        EntryJSONModel JSONentry= new EntryJSONModel();
+        JSONentry=jdbcClient.sql("SELECT * FROM entries WHERE ID = (SELECT MAX(ID) FROM entries)")
+                .query(EntryJSONModel.class)
+                .single();
+                entry.setId(JSONentry.getId());
+                entry.setItems(JSONData.readJSONItems(JSONentry.getItems()));
+                entry.setDate(JSONentry.getDate());
+                entry.setWeight(JSONentry.getWeight());
+                return Optional.of(entry);
+    }
+
+    @Override
+    public List<EntryModel> getEntriesRangebyID(int minID, int maxID) {
+        return jdbcClient.sql("SELECT * FROM entries WHERE ID BETWEEN ? AND ?")
+                .params(minID,maxID)
+                .query(EntryModel.class)
+                .list();
+    }
+
+
+    @Override
     public int addOne(EntryJSONModel entry) {
         //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         EntryJSONModel JSONentry= new EntryJSONModel();
@@ -124,6 +176,6 @@ public class EntryClientService implements EntryDataAcessInterface {
 
         Assert.state(updated == 1, "Failed to update post " + entry.getId());
         return entry;
-    }
+    }    
 
 }

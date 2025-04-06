@@ -51,11 +51,14 @@ public class ListController {
         String date = LocalDate.now().format(formatter);
         EntryModel entry=getItemsDB(date).get();
         ArrayList<Boolean> items = entry.getItems(); 
+        int weight = entry.getWeight();
         Boolean[] itemsArray = new Boolean[54];       
         for (int i = 0; i < 54; i++) {            
             itemsArray[i]= items.get(i);
         }
-        model.addAttribute("itemsModel", new ItemsModel(itemsArray));
+        ItemsModel itemsModel = new ItemsModel(itemsArray);
+        itemsModel.setWeight(weight);
+        model.addAttribute("itemsModel", itemsModel);
         model.addAttribute("type", "E");
         return "layouts/defaultLayout.html";
     }
@@ -95,12 +98,15 @@ public class ListController {
             model.getAttribute("item"+String.valueOf(i));
         }
         */ 
+        //get the default personal data for now
+        //PersonalModel PersonalModel = (PersonalModel) model.getAttribute("PersonalModel");
+        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
         String date = LocalDate.now().format(formatter); 
         EntryJSONModel entry = new EntryJSONModel();
         entry.setDate(LocalDate.parse(date));
         entry.setItems(items);
-        entry.setWeight(0);
+        entry.setWeight(itemsModel.getWeight());
         service.updateOne(date, entry); 
         
         model.addAttribute("type", "E");

@@ -57,6 +57,7 @@ public class ItemsModel {
     public boolean item52;
     public boolean item53;
     public boolean item54;
+    public int weight;
         
     public ItemsModel() {
         this.item1 = false;
@@ -113,6 +114,7 @@ public class ItemsModel {
         this.item52 = false;
         this.item53 = false;
         this.item54 = false;
+        this.weight = 0;
     }
 
     public Boolean[] getAllItems() {
@@ -615,5 +617,13 @@ public class ItemsModel {
 
     public void setItem54(boolean item54) {
         this.item54 = item54;
-    }    
+    } 
+    
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
 }
