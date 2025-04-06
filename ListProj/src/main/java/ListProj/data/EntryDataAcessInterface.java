@@ -14,9 +14,17 @@ public interface EntryDataAcessInterface {
     
     public Optional<EntryModel> getByDate(String date);
 
+    public Optional<EntryModel> getByID(int ID);
+
+    public Optional<EntryModel> getMinID();
+
+    public Optional<EntryModel> getMaxID();
+
     public List<EntryModel> getAllEntries();
 
     public List<EntryModel> getEntriesRange(String startDate, String endDate);
+
+    public List<EntryModel> getEntriesRangebyID(int minID, int maxID);
 
     public int addOne(EntryJSONModel entry);
 

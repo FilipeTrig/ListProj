@@ -69,6 +69,26 @@ public class EntryBussinessService implements EntryBussinessServiceInterface {
     @Override
     public boolean deleteOne(String date) {
             return EntryDB.deleteOne(date);
+    }
+
+    @Override
+    public Optional<EntryModel> getByID(int ID) {
+        return EntryDB.getByID(ID);
+    }
+
+    @Override
+    public Optional<EntryModel> getMinID() {
+        return EntryDB.getMinID();
+    }
+
+    @Override
+    public Optional<EntryModel> getMaxID() {
+        return EntryDB.getMaxID();
+    }
+
+    @Override
+    public List<EntryModel> getEntriesRangebyID(int minID, int maxID) {
+        return EntryDB.getEntriesRangebyID(minID, maxID);
     }  
 
         
