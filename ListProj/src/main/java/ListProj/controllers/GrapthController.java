@@ -38,18 +38,41 @@ public class GrapthController {
         }
         */
         List<EntryModel> EntryListGraph = service.getEntriesRangebyID(service.getMinID().get().getId(), service.getMaxID().get().getId());
-        Tripple[] trippleArray = buildArray(EntryListGraph);
-        model.addAttribute("trippleArray", trippleArray);
+        //Tripple[] trippleArray = buildArray(EntryListGraph);
+        //model.addAttribute("entriesList", convertToList(trippleArray));
+        model.addAttribute("entriesList", buildArray2(EntryListGraph));
         model.addAttribute("type", "G");
         return "layouts/defaultLayout.html";
     }
 
-    @GetMapping("/getData") 
+    //@GetMapping("/getData") not being used
+    /*
     public Tripple[] getData() {
         List<EntryModel> EntryListGraph = service.getEntriesRangebyID(service.getMinID().get().getId(), service.getMaxID().get().getId());
         Tripple[] trippleArray = buildArray(EntryListGraph);
         System.out.println("getData() called");
         return trippleArray;
+    }
+    */
+    private List<List<Object>> convertToList(Tripple[] trippleArray) {
+        List<List<Object>> list = new ArrayList<>();
+        for (Tripple tripple : trippleArray) {
+            List<Object> innerList = new ArrayList<>();
+            innerList.add(List.of(tripple.getDate(), tripple.getEntries(), tripple.getWeight()));
+            list.add(innerList);
+        }
+        return list;
+    } 
+
+    public List<List<Object>> buildArray2(List<EntryModel> EntryList) {
+        //Tripple[] trippleArray = new Tripple[EntryList.size()];
+        List<List<Object>> list = new ArrayList<>();
+        for (EntryModel entry : EntryList) {
+            int entryTrueCount = countEntries(entry.getItems());
+            list.add(List.of(entry.getDate().toString(), entryTrueCount, entry.getWeight()));
+            //System.out.println(trippleArray[EntryList.indexOf(entry)].toString());
+          }        
+        return List.copyOf(list); // return a immutable collection of list which is a copy of the list created in the method
     }
 
     public Tripple[] buildArray(List<EntryModel> EntryList) {
@@ -59,7 +82,7 @@ public class GrapthController {
             //String date = entry.getDate().toString();
             Tripple tripple = new Tripple(entry.getDate().toString(), entryTrueCount, entry.getWeight());
             trippleArray[EntryList.indexOf(entry)] = tripple;
-            System.out.println(trippleArray[EntryList.indexOf(entry)].toString());
+            //System.out.println(trippleArray[EntryList.indexOf(entry)].toString());
         }
         return trippleArray;
     }

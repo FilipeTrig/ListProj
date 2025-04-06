@@ -7,36 +7,18 @@
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        /*
-        $.ajax({
-          url: "/Graph/getData",
-          type: "GET",
-          success: function(result){
-            var entries=[];
-            entries[0] = ['Day', 'Completed Entries','Weight (in kg)'];
-            for (var i = 0; i < result.length; i++) {
-              entries[i+1] = result[i+1];    //[result[i].day, result[i].completedEntries, result[i].weight];
-            }
-            
-        */
-        var data = google.visualization.arrayToDataTable([
-        ['Day', 'Completed Entries','Weight (in kg)'],
-        ['1', 0, 0],
-        ['2', 0, 0],
-        ['3', 0, 0],
-        ['4', 0, 0],
-        ['5', 0, 0],
-        ['6', 0, 0],
-        ['7', 0, 0],
-        ['8', 0, 0],
-        ['9', 0, 0],
-        ['10', 0, 0],
-        ['11', 0, 0],
-        ['12', 0, 0],
-        ['13', 0, 0],
-        ['14', 0, 0],
-        ['15', 1, 1]
+ 
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Day');
+        data.addColumn('number', 'Completed Entries');
+        data.addColumn('number', 'Weight (in kg)');
+        data.addRows([
+          /*[# th:each="row : ${entriesList}"]*/
+          [[${row}]],
+          /*[/]*/
         ]);
+        
+        
 
         var view = new google.visualization.DataView(data);
         view.setColumns([0, 1, {
