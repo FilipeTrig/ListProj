@@ -112,4 +112,23 @@ public class ListController {
         model.addAttribute("type", "E");
         return "layouts/defaultLayout.html";
     }
+    
+    @GetMapping("/getItemsbyDate/")
+    public String displayListbyDate(String date,Model model) {
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
+        //String date = LocalDate.now().format(formatter);
+        EntryModel entry=getItemsDB(date).get();
+        ArrayList<Boolean> items = entry.getItems(); 
+        int weight = entry.getWeight();
+        Boolean[] itemsArray = new Boolean[54];       
+        for (int i = 0; i < 54; i++) {            
+            itemsArray[i]= items.get(i);
+        }
+        ItemsModel itemsModel = new ItemsModel(itemsArray);
+        itemsModel.setWeight(weight);
+        model.addAttribute("itemsModel", itemsModel);
+        model.addAttribute("type", "E");
+        return "layouts/defaultLayout.html";
+    }
+
 }
